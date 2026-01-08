@@ -1,0 +1,38 @@
+name: ci-test-ubuntu18
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "KubeArmor/BPF/**"
+      - "tests/**"
+      - ".github/workflows/ci-test-ubuntu18.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "KubeArmor/BPF/**"
+      - "tests/**"
+      - ".github/workflows/ci-test-ubuntu18.yml"
+
+# Declare default permissions as read only.
+permissions: read-all
+
+jobs:
+  build:
+    name: Compilation Test / ${{ matrix.os }} / ${{ matrix.runtime }}
+    runs-on: ${{ matrix.os }}
+    env:
+      RUNTIME: ${{ matrix.runtime }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu18]
+        runtime: ["containerd"]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: "KubeArmor/go.mod"
