@@ -177,7 +177,11 @@ client/gen:
 
 .PHONY: bundle
 bundle: operator-sdk
-	${OPERATOR_SDK} generate bundle --version ${BUNDLE_VER} --input-dir ./config --output-dir ./bundle --package ${BUNDLE_PKG}
+	${OPERATOR_SDK} generate bundle --version ${BUNDLE_VER} --input-dir ./config --output-dir ./bundle --package ${BUNDLE_PKG} --channels stable
+
+.PHONY: bundle-validate
+bundle-validate: 
+	${OPERATOR_SDK} bundle validate ./bundle
 
 .PHONY: clean
 clean:

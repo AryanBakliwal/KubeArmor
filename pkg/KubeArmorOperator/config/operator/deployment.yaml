@@ -14,10 +14,26 @@ spec:
       serviceAccountName: kubearmor-operator
       containers:
       - name: operator
-        image: kubearmor/kubearmor-operator:latest
+        image: docker.io/kubearmor/kubearmor-operator-ubi@sha256:761e49d754cff600c9eee0b76bf67a45f35a889736e8173d2375e4c89f9f739a
         imagePullPolicy: IfNotPresent
         env:
         - name: KUBEARMOR_OPERATOR_NS
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: RELATED_IMAGE_KUBEARMOR_OPERATOR
+          value: docker.io/kubearmor/kubearmor-operator-ubi@sha256:761e49d754cff600c9eee0b76bf67a45f35a889736e8173d2375e4c89f9f739a
+        - name: RELATED_IMAGE_KUBEARMOR_SNITCH
+          value: docker.io/kubearmor/kubearmor-snitch-ubi@sha256:1175656ab728d3b1e7389f9f2c0ae78cf80a3ab2b6a5700fc86661163469e102
+        - name: RELATED_IMAGE_KUBEARMOR
+          value: docker.io/kubearmor/kubearmor-ubi@sha256:c9d37b02f5bba3888cd715c761677667451e2367a5b348276895267f2b1d8f41
+        - name: RELATED_IMAGE_KUBEARMOR_INIT
+          value: docker.io/kubearmor/kubearmor-init-ubi@sha256:b1c82eeda2344807c055db2e887b3176dfa09b3999d74ef3b4aad97e33ff3ab8
+        - name: RELATED_IMAGE_KUBEARMOR_RELAY_SERVER
+          value: docker.io/kubearmor/kubearmor-relay-server@sha256:0a1a20ef02bd05eaa4a900948cadee6ae7650b0dde70abe1935608eaa5f931b7
+        - name: RELATED_IMAGE_KUBEARMOR_CONTROLLER
+          value: docker.io/kubearmor/kubearmor-controller-ubi@sha256:100f93762e4e17359a5e884b3688905b91386a3c5d819bf25d220cdecfdb75cd
+        - name: RELATED_IMAGE_KUBE_RBAC_PROXY
+          value: registry.connect.redhat.com/sumologic/kube-rbac-proxy@sha256:1153a4592746b05e019bde4d818d176ff9350c013f84d49829032540de882841
+        - name: REDHAT_CERTIFIED_OP
+          value: "true"

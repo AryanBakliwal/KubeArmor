@@ -61,6 +61,33 @@ rules:
   verbs:
   - create
   - get
+# create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+# manage known secrets
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - update
+  - delete
+  resourceNames:
+  - kubearmor-ca
+  - kubearmor-client-certs
+  - kubearmor-relay-server-certs
+  - kubearmor-controller-webhook-server-cert
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role

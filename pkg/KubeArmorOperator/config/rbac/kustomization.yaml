@@ -5,3 +5,5 @@ resources:
   - "clusterrole.yaml"
   - "clusterrolebinding.yaml"
   - "service-account.yaml"
+  - "role.yaml"
+  - "rolebinding.yaml"
